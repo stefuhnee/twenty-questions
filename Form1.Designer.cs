@@ -34,8 +34,8 @@
             this.AddQuestionGroup = new System.Windows.Forms.Panel();
             this.UserItem = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.question = new System.Windows.Forms.TextBox();
+            this.item = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.AddQuestionGroup.SuspendLayout();
@@ -79,8 +79,8 @@
             this.AddQuestionGroup.Controls.Add(this.button1);
             this.AddQuestionGroup.Controls.Add(this.UserItem);
             this.AddQuestionGroup.Controls.Add(this.label2);
-            this.AddQuestionGroup.Controls.Add(this.textBox2);
-            this.AddQuestionGroup.Controls.Add(this.textBox1);
+            this.AddQuestionGroup.Controls.Add(this.question);
+            this.AddQuestionGroup.Controls.Add(this.item);
             this.AddQuestionGroup.Controls.Add(this.label1);
             this.AddQuestionGroup.Location = new System.Drawing.Point(8, 226);
             this.AddQuestionGroup.Name = "AddQuestionGroup";
@@ -106,19 +106,19 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "What item were you thinking of?";
             // 
-            // textBox2
+            // question
             // 
-            this.textBox2.Location = new System.Drawing.Point(25, 171);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(501, 31);
-            this.textBox2.TabIndex = 2;
+            this.question.Location = new System.Drawing.Point(25, 171);
+            this.question.Name = "question";
+            this.question.Size = new System.Drawing.Size(501, 31);
+            this.question.TabIndex = 2;
             // 
-            // textBox1
+            // item
             // 
-            this.textBox1.Location = new System.Drawing.Point(24, 79);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(502, 31);
-            this.textBox1.TabIndex = 1;
+            this.item.Location = new System.Drawing.Point(24, 79);
+            this.item.Name = "item";
+            this.item.Size = new System.Drawing.Size(502, 31);
+            this.item.TabIndex = 1;
             // 
             // label1
             // 
@@ -164,8 +164,8 @@
         private System.Windows.Forms.Button yesButton;
         private System.Windows.Forms.Button noButton;
         private System.Windows.Forms.Panel AddQuestionGroup;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox question;
+        private System.Windows.Forms.TextBox item;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label UserItem;

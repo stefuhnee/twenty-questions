@@ -123,9 +123,10 @@ namespace TwentyQs
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Question userQuestion = new Question(textBox1.Text);
+            Question userQuestion = new Question(question.Text);
             userQuestion.no = current;
-            userQuestion.yes = new Question(textBox2.Text);
+            parent.yes = userQuestion;
+            userQuestion.yes = new Question(item.Text);
             SaveTree();
             Close();
         }
