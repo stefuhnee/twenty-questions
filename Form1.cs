@@ -16,6 +16,7 @@ namespace TwentyQs
         Question root;
         Question current;
         Question parent;
+        string pathToCurrent;
 
         public Form1()
         {
@@ -27,12 +28,9 @@ namespace TwentyQs
             //root = LoadTree();
             //if (root == null)
             //{
-                root = new Question();
-                root.text = "Is it electronic?";
-                root.yes = new Question();
-                root.yes.text = "Is it a clock?";
-                root.no = new Question();
-                root.no.text = "Is it an eraser?";
+                root = new Question("Is it electronic?");
+                root.yes = new Question("Is it a clock?");
+                root.no = new Question("Is it an eraser?");
             //}
             UpdateCurrent(root);
         }
@@ -60,9 +58,8 @@ namespace TwentyQs
         {
             if (yesOrNo != null)
                 writer.WriteLine(yesOrNo + " " + q.text);
-            else if (q.IsLeaf())
-                writer.WriteLine("Leaf: " + q.text);
-            else writer.WriteLine(q.text);
+            else
+                writer.WriteLine(q.text);
             if (!q.IsLeaf())
             {
                 if (q.no == null)
@@ -72,14 +69,26 @@ namespace TwentyQs
             }
         }
 
-        //private Question LoadTree()
-        //{
-        //    // load the tree
-        //}
+        private void LoadTree()
+        {
+            StreamReader reader = new StreamReader("savegame.txt");
+            LoadQuestion(reader, root);
+            reader.Close();
+            // load the tree
+        }
+
+        private void LoadQuestion(StreamReader reader, Question q)
+        {
+            
+        }
 
         private void UpdateCurrent(Question newCurrent)
         {
             parent = current;
+            if (current != null && current.no == newCurrent)
+                pathToCurrent = "no";
+            else if (current != null)
+                pathToCurrent = "yes";
             current = newCurrent;
             UpdateText();
         }
@@ -125,7 +134,9 @@ namespace TwentyQs
         {
             Question userQuestion = new Question(question.Text);
             userQuestion.no = current;
-            parent.yes = userQuestion;
+            if (pathToCurrent == "yes")
+                parent.yes = userQuestion;
+            else parent.no = userQuestion;
             userQuestion.yes = new Question(item.Text);
             SaveTree();
             Close();
