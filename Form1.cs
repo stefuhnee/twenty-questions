@@ -25,13 +25,13 @@ namespace TwentyQs
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //root = LoadTree();
-            //if (root == null)
-            //{
+            root = LoadTree();
+            if (root == null)
+            {
                 root = new Question("Is it electronic?");
                 root.yes = new Question("Is it a clock?");
                 root.no = new Question("Is it an eraser?");
-            //}
+            }
             UpdateCurrent(root);
         }
 
@@ -43,7 +43,7 @@ namespace TwentyQs
                 // Write root as 1 line
                 // recurse on yes branch
                 // recurse on no branch
-                StreamWriter writer = new StreamWriter("savegame.txt");
+                StreamWriter writer = new StreamWriter("savegame2.txt");
                 SaveQuestion(writer, root, null);
                 writer.Flush();
                 writer.Close();
@@ -58,28 +58,50 @@ namespace TwentyQs
         {
             if (yesOrNo != null)
                 writer.WriteLine(yesOrNo + " " + q.text);
-            else
-                writer.WriteLine(q.text);
             if (!q.IsLeaf())
             {
                 if (q.no == null)
                     throw new Exception("node is half leaf");
+                writer.WriteLine(q.text);
                 SaveQuestion(writer, q.yes, "yes");
                 SaveQuestion(writer, q.no, "no");
             }
         }
 
-        private void LoadTree()
+        private Question LoadTree()
         {
-            StreamReader reader = new StreamReader("savegame.txt");
+            StreamReader reader = new StreamReader("savegame2.txt");
+            string text = reader.ReadLine();
+            if (text == "")
+            {
+                reader.Close();
+                return null;
+            }
+            root = new Question(text);
             LoadQuestion(reader, root);
             reader.Close();
+            DumpTree();
+            return root;
             // load the tree
         }
 
-        private void LoadQuestion(StreamReader reader, Question q)
+        private void LoadQuestion(StreamReader reader, Question current)
         {
-            
+            string text = reader.ReadLine();
+            if (text == null)
+                return;
+            Question next = new Question(text);
+            if (text.Split(' ').First() == "yes")
+            {
+                current.yes = next;
+                LoadQuestion(reader, next);
+            }
+                
+            else if (text.Split(' ').First() =="no")
+            {
+                current.no = next;
+                LoadQuestion(reader, next);
+            }
         }
 
         private void UpdateCurrent(Question newCurrent)
@@ -98,6 +120,19 @@ namespace TwentyQs
             questionText.Text = current.text;
         }
 
+        private void DumpTree()
+        {
+            Log(root, "");
+        }
+
+        private void Log(Question q, string indent)
+        {
+            if (q == null) return;
+            Console.WriteLine(indent + q.text);
+            if (q.yes != null) Log(q.yes, indent + "  ");
+            if (q.no != null) Log(q.no, indent + "  ");
+        }
+
         private void yesButton_Click(object sender, EventArgs e)
         {
             if (current.IsLeaf())
@@ -109,10 +144,7 @@ namespace TwentyQs
                     UpdateText();
                 }
                 else
-                {
-                    SaveTree();
                     Close();
-                }
             }
             else // branch case
                 UpdateCurrent(current.yes);
@@ -120,6 +152,8 @@ namespace TwentyQs
 
         private void noButton_Click(object sender, EventArgs e)
         {
+            Console.WriteLine(current.text + "==============text");
+            Console.WriteLine(current.IsLeaf() + "====== is Leaf");
             if (current.IsLeaf())
             {
                 UserItem.Text = "Please enter a question that would\n"
@@ -127,7 +161,10 @@ namespace TwentyQs
                 AddQuestionGroup.Show();
             }
             else
+            {
+                Console.WriteLine("ccurrent.no", current.no);
                 UpdateCurrent(current.no);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
