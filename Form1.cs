@@ -121,5 +121,13 @@ namespace TwentyQs
                 UpdateCurrent(current.no);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Question userQuestion = new Question(textBox1.Text);
+            userQuestion.no = current;
+            userQuestion.yes = new Question(textBox2.Text);
+            SaveTree();
+            Close();
+        }
     }
 }

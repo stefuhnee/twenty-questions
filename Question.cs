@@ -8,6 +8,13 @@ namespace TwentyQs
 {
     public class Question
     {
+        public Question() { }
+
+        public Question(string text)
+        {
+            this.text = text;
+        }
+
         public string text;
         public Question yes;
         public Question no;
