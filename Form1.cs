@@ -115,15 +115,15 @@ namespace TwentyQs
 
         private void DumpTree()
         {
-            Log(root, "");
+            Log("", root, "");
         }
 
-        private void Log(Question q, string indent)
+        private void Log(string yesOrNo, Question q, string indent)
         {
             if (q == null) return;
-            Console.WriteLine(indent + q.text);
-            if (q.yes != null) Log(q.yes, indent + "  ");
-            if (q.no != null) Log(q.no, indent + "  ");
+            Console.WriteLine(indent + yesOrNo + q.text);
+            if (q.yes != null) Log("Y: ", q.yes, indent + "   ");
+            if (q.no != null) Log("N: ", q.no, indent + "   ");
         }
 
         private void yesButton_Click(object sender, EventArgs e)
