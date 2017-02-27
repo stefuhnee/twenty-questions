@@ -60,8 +60,6 @@ namespace TwentyQs
                 writer.WriteLine(" #");
             else
             {
-                if (q.no == null)
-                    throw new Exception("node is half leaf");
                 writer.WriteLine(q.text);
                 SaveQuestion(writer, q.yes);
                 SaveQuestion(writer, q.no);
