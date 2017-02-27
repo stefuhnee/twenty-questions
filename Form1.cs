@@ -28,9 +28,9 @@ namespace TwentyQs
             root = LoadTree();
             if (root == null)
             {
-                root = new Question("Is it electronic?");
-                root.yes = new Question("Is it a clock?");
-                root.no = new Question("Is it an eraser?");
+                root = new Question("Is it a mammal?");
+                root.yes = new Question("Is it a horse?");
+                root.no = new Question("Is it a Fiji Crested Iguana?");
             }
             UpdateCurrent(root);
         }
